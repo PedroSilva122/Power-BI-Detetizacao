@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "projeto_gitPBIP"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ec54ebfe-a26a-41ff-8e39-e38677c8bddc"
+  }
+}

@@ -1,0 +1,23 @@
+relationship AutoDetected_4f047f45-8364-4fef-a6e8-f74a3bbcb33e
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'projeto_detetizacao fato_detetizacao'.ID_Clientes
+	toColumn: 'projeto_detetizacao dim_clientes'.ID_Clientes
+
+relationship AutoDetected_e6848dfe-da71-4fc0-ac4b-9a3d75b3aaf1
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'projeto_detetizacao fato_detetizacao'.ID_dias
+	toColumn: 'projeto_detetizacao dim_dias_horarios'.ID_dias
+
+relationship AutoDetected_8f50ddc1-0ebe-4808-bdc8-fb5417e1c61d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'projeto_detetizacao fato_detetizacao'.ID_tipo
+	toColumn: 'projeto_detetizacao dim_produto'.ID_tipo
+
+relationship 3e42b003-4383-439e-bb05-12febe95dd0c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'projeto_detetizacao dim_dias_horarios'.data
+	toColumn: LocalDateTable_0d29e27e-ba36-44c4-81e3-991d1df3b69e.Date
+

@@ -1,0 +1,23 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["projeto_detetizacao dim_clientes","projeto_detetizacao dim_dias_horarios","projeto_detetizacao dim_produto","projeto_detetizacao fato_detetizacao"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'projeto_detetizacao dim_clientes'
+ref table 'projeto_detetizacao dim_dias_horarios'
+ref table 'projeto_detetizacao dim_produto'
+ref table 'projeto_detetizacao fato_detetizacao'
+ref table DateTableTemplate_a82fbb49-9578-48a6-9cf7-5d962d6f2c3d
+ref table LocalDateTable_0d29e27e-ba36-44c4-81e3-991d1df3b69e
+
+ref cultureInfo pt-BR
+

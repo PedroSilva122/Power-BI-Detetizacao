@@ -1,0 +1,61 @@
+table 'projeto_detetizacao dim_clientes'
+	lineageTag: 207c3b61-cb97-4ce4-9ce3-3256adcfc1f3
+
+	measure F =
+			CALCULATE(
+			     COUNTROWS('projeto_detetizacao dim_produto'),
+			     'projeto_detetizacao dim_produto'[tipo] = "F"
+			)
+		formatString: 0
+		lineageTag: 057c6911-c166-4f2c-8f8b-3bff280f92d9
+
+	measure B+F =
+			CALCULATE(
+			     COUNTROWS('projeto_detetizacao dim_produto'),
+			     'projeto_detetizacao dim_produto'[tipo] = "B + F"
+			)
+		formatString: 0
+		lineageTag: c310c3f6-4ab5-4177-906e-25eeed6b7db3
+
+	measure B =
+			CALCULATE(
+			     COUNTROWS('projeto_detetizacao dim_produto'),
+			     'projeto_detetizacao dim_produto'[tipo] = "B"
+			)
+		formatString: 0
+		lineageTag: ec5f6eae-34e8-4266-b872-8926e2b0beac
+
+	column ID_Clientes
+		dataType: int64
+		formatString: 0
+		lineageTag: 832d714c-4909-460b-9cba-de16386364f2
+		summarizeBy: none
+		sourceColumn: ID_Clientes
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome
+		dataType: string
+		lineageTag: 562298a1-ebc4-4dbe-8e2c-7b86b8f4dd4c
+		summarizeBy: none
+		sourceColumn: nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column bairro
+		dataType: string
+		lineageTag: cbbbccfe-e21e-4b14-970f-a8dd5e819657
+		summarizeBy: none
+		sourceColumn: bairro
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'projeto_detetizacao dim_clientes' = m
+		mode: import
+		source =
+				let
+				    Fonte = MySQL.Database("localhost", "projeto_detetizacao", [ReturnSingleDatabase=true]),
+				    projeto_detetizacao_dim_clientes = Fonte{[Schema="projeto_detetizacao",Item="dim_clientes"]}[Data]
+				in
+				    projeto_detetizacao_dim_clientes
+

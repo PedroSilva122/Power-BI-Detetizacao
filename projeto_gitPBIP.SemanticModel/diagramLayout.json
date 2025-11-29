@@ -1,0 +1,74 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 488.38717545597194,
+            "y": 482.92682926829275
+          },
+          "nodeIndex": "projeto_detetizacao dim_clientes",
+          "nodeLineageTag": "207c3b61-cb97-4ce4-9ce3-3256adcfc1f3",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 511.53974349879729
+          },
+          "nodeIndex": "projeto_detetizacao dim_dias_horarios",
+          "nodeLineageTag": "b892e2b0-cda1-426e-9b7e-293373c391b8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 411.91465125296941,
+            "y": 0
+          },
+          "nodeIndex": "projeto_detetizacao dim_produto",
+          "nodeLineageTag": "d3918075-9fa7-478d-9d9d-5d2fe5298e4c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 50.189530127113386,
+            "y": 153.48910044009756
+          },
+          "nodeIndex": "projeto_detetizacao fato_detetizacao",
+          "nodeLineageTag": "5a3f7acf-ddc7-4a69-a4bf-9060d52b573b",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 82,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

@@ -1,0 +1,50 @@
+table 'projeto_detetizacao dim_dias_horarios'
+	lineageTag: b892e2b0-cda1-426e-9b7e-293373c391b8
+
+	column ID_dias
+		dataType: int64
+		formatString: 0
+		lineageTag: 849b3098-1a59-4741-8b04-a1ac9c23a6fd
+		summarizeBy: none
+		sourceColumn: ID_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b1cf4bc8-11f0-4115-b270-ee7297831c40
+		summarizeBy: none
+		sourceColumn: data
+
+		variation Variation
+			isDefault
+			relationship: 3e42b003-4383-439e-bb05-12febe95dd0c
+			defaultHierarchy: LocalDateTable_0d29e27e-ba36-44c4-81e3-991d1df3b69e.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column horario
+		dataType: string
+		lineageTag: 57b9a6a4-7769-43c8-92a7-3719a8e0ac35
+		summarizeBy: none
+		sourceColumn: horario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'projeto_detetizacao dim_dias_horarios' = m
+		mode: import
+		source =
+				let
+				    Fonte = MySQL.Database("localhost", "projeto_detetizacao", [ReturnSingleDatabase=true]),
+				    projeto_detetizacao_dim_dias_horarios = Fonte{[Schema="projeto_detetizacao",Item="dim_dias_horarios"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(projeto_detetizacao_dim_dias_horarios,{{"data", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

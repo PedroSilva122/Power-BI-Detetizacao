@@ -1,0 +1,70 @@
+table 'projeto_detetizacao dim_produto'
+	lineageTag: d3918075-9fa7-478d-9d9d-5d2fe5298e4c
+
+	measure DAX_sum_barata = CALCULATE(SUM('projeto_detetizacao dim_produto'[valor]), FILTER('projeto_detetizacao dim_produto', 'projeto_detetizacao dim_clientes'[B]))
+		lineageTag: 6416203f-ebe7-471a-be15-ab7025a5922f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DAX_sum_formiga = CALCULATE(SUM('projeto_detetizacao dim_produto'[valor]), FILTER('projeto_detetizacao dim_produto', 'projeto_detetizacao dim_clientes'[F]))
+		lineageTag: 7de2393d-e247-448d-a563-c5a19cff2327
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DAX_sum_barata + formiga' = CALCULATE(SUM('projeto_detetizacao dim_produto'[valor]), FILTER('projeto_detetizacao dim_produto', 'projeto_detetizacao dim_clientes'[B+F]))
+		lineageTag: 50fe9f8f-669b-40df-b9d7-34c20cfcc083
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ID_tipo
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f65ded1-c289-4252-9d16-ce804b9e6caf
+		summarizeBy: none
+		sourceColumn: ID_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: d0d2ea2f-8907-420b-90b6-d6397b3ab1a3
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 904b56d8-8712-4a9d-bfaa-fec1d6f4a7dc
+		summarizeBy: sum
+		sourceColumn: valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	column Meta_mensal =
+			SWITCH(
+			    TRUE(),
+			    'projeto_detetizacao dim_produto'[tipo] = "B", 5000,
+			    'projeto_detetizacao dim_produto'[tipo] = "F", 5000,
+			    'projeto_detetizacao dim_produto'[tipo] = "B + F", 15000
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 8c439f2d-e760-4dbc-b4f8-ad9eddc357d1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	partition 'projeto_detetizacao dim_produto' = m
+		mode: import
+		source =
+				let
+				    Fonte = MySQL.Database("localhost", "projeto_detetizacao", [ReturnSingleDatabase=true]),
+				    projeto_detetizacao_dim_produto = Fonte{[Schema="projeto_detetizacao",Item="dim_produto"]}[Data]
+				in
+				    projeto_detetizacao_dim_produto
+
